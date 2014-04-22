@@ -1,4 +1,5 @@
 
+var orderPrice = 0;
 // ---------------------------------PART1---------------------------
 var FoodItem = function(name, calories, vegan, glutenFree, citrusFree){
 	this.name = name;
@@ -33,24 +34,24 @@ var FoodItem = function(name, calories, vegan, glutenFree, citrusFree){
 
 
 // -----------------------------------PART2---------------------------------
-var Drink = function(name, description, price) {
-	this.name = name;
-	this.price = price;
-	this.description = description;
-	this.ingredients = [];
-};
-Drink.prototype.toString = toString;
-// -----------------PLATE---------------------------
-var Plate = function(name, description, price) {
-	this.name = name;
-	this.price = price;
-	this.description = description;
-	this.ingredients = [];
-};
-	// Plate methods
-Plate.prototype.toString = toString;
 
-Plate.prototype.isVegan = function() {
+// -----------------TO STRING------------------
+function toString() {
+	var message = '';
+	for (key in this){
+		if(typeof(this[key]) !== 'function' ){
+			if(this[key] instanceof Array){
+				message += key + ': ' + this[key].join('\n') + '\n';
+			}
+			else{
+				message += key + ': ' + this[key] + '\n';
+			}
+		}
+	}
+	return message;
+}
+
+var isVegan = function() {
 	var isVegan = true;
 	this.ingredients.map(function(item) {
 		if (item.vegan === false) {
@@ -60,7 +61,7 @@ Plate.prototype.isVegan = function() {
 	return isVegan;
 };
 
-Plate.prototype.isGlutenFree = function() {
+var isGlutenFree = function() {
 	var glutenFree = true;
 	this.ingredients.map(function(item) {
 		if (item.glutenFree === false) {
@@ -70,7 +71,7 @@ Plate.prototype.isGlutenFree = function() {
 	return glutenFree;
 };
 
-Plate.prototype.isCitrusFree = function() {
+var isCitrusFree = function() {
 	var citrusFree = true;
 	this.ingredients.map( function(item) {
 		if (item.citrusFree === false) {
@@ -79,6 +80,32 @@ Plate.prototype.isCitrusFree = function() {
 	});
 	return citrusFree;
 };
+var Drink = function(name, description, price) {
+	this.name = name;
+	this.price = price;
+	this.description = description;
+	this.ingredients = [];
+};
+Drink.prototype.toString = toString;
+Drink.prototype.isVegan = isVegan;
+Drink.prototype.isGlutenFree = isGlutenFree;
+Drink.prototype.isCitrusFree = isCitrusFree;
+// -----------------PLATE---------------------------
+var Plate = function(name, description, price) {
+	this.name = name;
+	this.price = price;
+	this.description = description;
+	this.ingredients = [];
+};
+	// Plate methods
+Plate.prototype.toString = toString;
+Plate.prototype.isVegan = isVegan;
+Plate.prototype.isGlutenFree = isGlutenFree;
+Plate.prototype.isCitrusFree = isCitrusFree;
+
+
+
+
 
 // ----------------ORDER-------------------------
 var Order = function() {
@@ -107,21 +134,6 @@ var Customer = function(dietaryPreference) {
 Customer.prototype.toString = toString;
 
 
-// -----------------TO STRING------------------
-function toString() {
-	var message = '';
-	for (key in this){
-		if(typeof(this[key]) !== 'function' ){
-			if(this[key] instanceof Array){
-				message += key + ': ' + this[key].join('\n') + '\n';
-			}
-			else{
-				message += key + ': ' + this[key] + '\n';
-			}
-		}
-	}
-	return message;
-}
 
 
 
@@ -141,7 +153,7 @@ var margaritaMix = new FoodItem('Margarita Mix',200,true,true,false);
 var burrito = new Plate('Burrito Plate','Burrito on a plate',7);
 var guacamole = new Plate('Guacamole Plate','Guacamole!!!',5);
 // Add Ingredients to Plates
-burrito.ingredients = [tortilla, beans, rice, steak, lime];
+burrito.ingredients = [tortilla, beans, rice, steak];
 guacamole.ingredients = [avacado, lime, greenPeppers];
 
 // Create new instances of Drinks
@@ -201,8 +213,21 @@ $(document).on('ready', function() {
 		description.text(obj.description);
 		descriptionContainer.append(description);
 		descriptionContainer.append(addBtn);
-		item.append(plate).append(price).append(descriptionContainer);
+		item.append(plate);
 
+		if (obj.isVegan()) {
+			var veganIcon = $('<h5 class="icon">★</h5>');
+			item.append(veganIcon);
+		}
+		if (obj.isGlutenFree()) {
+			var glutenIcon = $('<h5 class="icon">●</h5>');
+			item.append(glutenIcon);
+		}
+		if (obj.isCitrusFree()) {
+			var citrusIcon = $('<h5 class="icon">❁</h5>');
+			item.append(citrusIcon);
+		}
+		item.append(price).append(descriptionContainer);
 		return item;
 	};
 
@@ -215,7 +240,6 @@ var build = function(arr, sectionName){
 		section.find($('ul')).append($('<li class="list-item">'));
 		$('.list-item').append(menuItem(obj));
 		$('.list-item').removeClass('list-item');
-
 	});
 };
 
@@ -241,12 +265,21 @@ build(app, 'Appetizers');
 	});
 
 	$(document).on('click', '.add-item', function(){   
+		var itemPrice = +$(this).closest('.item').find('.price').text();
 		// console.log('clicked');
 		var orderItem = $(this).closest('.item').find('.plate').text();
 		// console.log(orderItem);
-
+		$('#order').append('<li class="order-item">' + orderItem + ' : $' + '<span>' + itemPrice + '</span>' + '</li>')
+		orderPrice += itemPrice;
+		$('#order-price').text(orderPrice);
 		return false;
+	});
 
+	$(document).on('click', '.order-item', function() {
+		var itemPrice = +$(this).find('span').text();
+		orderPrice -= itemPrice;
+		$('#order-price').text(orderPrice);
+		$(this).remove();
 	});
 
   

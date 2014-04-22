@@ -22,3 +22,8 @@
 .item-title{
 	display: inline-block;
 }
+
+.price, .icon {
+	display: inline;
+	margin: 5px;
+}
