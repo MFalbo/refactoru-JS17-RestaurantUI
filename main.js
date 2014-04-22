@@ -1,7 +1,3 @@
-// $(document).on('ready', function() {
-  
-// });
-
 
 // ---------------------------------PART1---------------------------
 var FoodItem = function(name, calories, vegan, glutenFree, citrusFree){
@@ -13,35 +9,27 @@ var FoodItem = function(name, calories, vegan, glutenFree, citrusFree){
 	
 };
 
-FoodItem.prototype.toString = function(){
-		var message = '';
+// FoodItem.prototype.toString = function(){
+// 		var message = '';
 
-		for (key in this){
-			if(typeof(this[key]) === 'string' || typeof(this[key]) === 'number' ){
+// 		for (key in this){
+// 			if(typeof(this[key]) === 'string' || typeof(this[key]) === 'number' ){
 
-				message += key + ': ' + this[key] + '\n';
-			}
-		}
+// 				message += key + ': ' + this[key] + '\n';
+// 			}
+// 		}
 
-			this.vegan ? message += 'This is vegan\n' : message +='This is not vegan\n';
-			this.glutenFree ? message += 'This is gluten free\n' : message += 'This contains gluten\n';
-			this.citrusFree ? message += 'This is citrus free\n' : message += 'This contains citrus\n';
+// 			this.vegan ? message += 'This is vegan\n' : message +='This is not vegan\n';
+// 			this.glutenFree ? message += 'This is gluten free\n' : message += 'This contains gluten\n';
+// 			this.citrusFree ? message += 'This is citrus free\n' : message += 'This contains citrus\n';
 				
-			return message;
-	};
+// 			return message;
+// 	};
 
-FoodItem.prototype.create = function(){
-	
-}
+// FoodItem.prototype.create = function(){
 
 
-// var pizza = new FoodItem('Pizza', 700, false, false, true);
-// var sandwich = new FoodItem('Sandwich', 350, true, false, true);
-// var soup = new FoodItem('Soup', 225, true, true, false);
-
-// console.log(pizza.toString());
-// console.log(sandwich.toString());
-// console.log(soup.toString());
+// }
 
 
 // -----------------------------------PART2---------------------------------
@@ -173,13 +161,124 @@ var ourRestaurant = new Restaurant("Pepe's",'Mexican Food',ourMenu);
 
 
 
-console.log(ourRestaurant.toString());
+// console.log(ourRestaurant.toString());
 
 
 
 // console.log(burrito.isVegan());
 // console.log(burrito.isGlutenFree());
 // console.log(burrito.isCitrusFree());
+
+// -------------Dynamically Create Menu----------------
+$(document).on('ready', function() {
+
+	console.log('document ready');
+
+	var createMenuSection = function(sectionName){
+		var section = $('.template.original').clone();
+		section.removeClass('original');
+		$('#menu').prepend(section);
+		section.find($('h3')).text(sectionName);
+		// section.find($('ul')).append($('<li>'));
+
+		return section;
+	};
+
+// createMenuSection('Desserts');
+// createMenuSection('Entrees');
+// createMenuSection('Drinks');
+// createMenuSection('Appetizers');
+
+	var menuItem = function(obj){
+		// console.log('in menu item function');
+		var item = $('<div class="item">');
+		var plate = $('<h5 class="plate item-title"></h5>');
+		var price = $('<h5 class="price item-title">' + obj.price + '</h5>');
+		var descriptionContainer = $('<div class="description-container"></div>');
+		var description = $('<p class="description"></p>');
+		var addBtn = $('<button class="add-item">');
+		plate.text(obj.name);
+		description.text(obj.description);
+		descriptionContainer.append(description);
+		descriptionContainer.append(addBtn);
+		item.append(plate).append(price).append(descriptionContainer);
+
+		return item;
+	};
+
+
+var build = function(arr, sectionName){
+	
+	var section = createMenuSection(sectionName);	
+
+	arr.map(function(obj){
+		section.find($('ul')).append($('<li class="list-item">'));
+		$('.list-item').append(menuItem(obj));
+		$('.list-item').removeClass('list-item');
+
+	});
+};
+
+
+// Construct Food Arrays and Append everything to the DOM
+var des = [];
+build(des, 'Desserts');
+
+var ent = [burrito];
+build(ent, 'Entrees');
+
+var drk = [margarita];
+build(drk, 'Drinks');
+
+var app = [guacamole];
+build(app, 'Appetizers');
+
+
+// Event Handlers for Menu Sections
+	$(document).on('click', '.item', function(){
+		// console.log('clicked');
+		$(this).find('.description-container').slideToggle();
+	});
+
+	$(document).on('click', '.add-item', function(){   
+		// console.log('clicked');
+		var orderItem = $(this).closest('.item').find('.plate').text();
+		// console.log(orderItem);
+
+		return false;
+
+	});
+
+  
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

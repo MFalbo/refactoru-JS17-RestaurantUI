@@ -1,0 +1,24 @@
+.template{
+	float: left;
+	display: inline-block;
+}
+
+.description-container{
+	display: none;
+}
+
+#menu{
+	width: 70%;
+	float: left;
+	display: inline-block;
+}
+
+#order{
+	width: 20%;
+	float: left;
+	display: inline-block;
+}
+
+.item-title{
+	display: inline-block;
+}
