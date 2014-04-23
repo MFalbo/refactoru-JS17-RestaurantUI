@@ -1,191 +1,17 @@
 
-var orderPrice = 0;
-// ---------------------------------PART1---------------------------
-var FoodItem = function(name, calories, vegan, glutenFree, citrusFree){
-	this.name = name;
-	this.calories = calories;
-	this.vegan = vegan;
-	this.glutenFree = glutenFree;
-	this.citrusFree = citrusFree;
-	
-};
-
-// FoodItem.prototype.toString = function(){
-// 		var message = '';
-
-// 		for (key in this){
-// 			if(typeof(this[key]) === 'string' || typeof(this[key]) === 'number' ){
-
-// 				message += key + ': ' + this[key] + '\n';
-// 			}
-// 		}
-
-// 			this.vegan ? message += 'This is vegan\n' : message +='This is not vegan\n';
-// 			this.glutenFree ? message += 'This is gluten free\n' : message += 'This contains gluten\n';
-// 			this.citrusFree ? message += 'This is citrus free\n' : message += 'This contains citrus\n';
-				
-// 			return message;
-// 	};
-
-// FoodItem.prototype.create = function(){
-
-
-// }
-
-
-// -----------------------------------PART2---------------------------------
-
-// -----------------TO STRING------------------
-function toString() {
-	var message = '';
-	for (key in this){
-		if(typeof(this[key]) !== 'function' ){
-			if(this[key] instanceof Array){
-				message += key + ': ' + this[key].join('\n') + '\n';
-			}
-			else{
-				message += key + ': ' + this[key] + '\n';
-			}
-		}
-	}
-	return message;
-}
-
-var isVegan = function() {
-	var isVegan = true;
-	this.ingredients.map(function(item) {
-		if (item.vegan === false) {
-			return isVegan = false;
-		}
-	});
-	return isVegan;
-};
-
-var isGlutenFree = function() {
-	var glutenFree = true;
-	this.ingredients.map(function(item) {
-		if (item.glutenFree === false) {
-			return glutenFree = false;
-		}
-	});
-	return glutenFree;
-};
-
-var isCitrusFree = function() {
-	var citrusFree = true;
-	this.ingredients.map( function(item) {
-		if (item.citrusFree === false) {
-			return citrusFree = false;
-		}
-	});
-	return citrusFree;
-};
-var Drink = function(name, description, price) {
-	this.name = name;
-	this.price = price;
-	this.description = description;
-	this.ingredients = [];
-};
-Drink.prototype.toString = toString;
-Drink.prototype.isVegan = isVegan;
-Drink.prototype.isGlutenFree = isGlutenFree;
-Drink.prototype.isCitrusFree = isCitrusFree;
-// -----------------PLATE---------------------------
-var Plate = function(name, description, price) {
-	this.name = name;
-	this.price = price;
-	this.description = description;
-	this.ingredients = [];
-};
-	// Plate methods
-Plate.prototype.toString = toString;
-Plate.prototype.isVegan = isVegan;
-Plate.prototype.isGlutenFree = isGlutenFree;
-Plate.prototype.isCitrusFree = isCitrusFree;
-
-
-
-
-
-// ----------------ORDER-------------------------
-var Order = function() {
-	this.plates = [];
-};
-Order.prototype.toString = toString;
-
-// -----------------MENU-------------------------
-var Menu = function() {
-	this.plates = [];
-};
-Menu.prototype.toString = toString;
-
-// -----------------RESTAURANT-------------------------
-var Restaurant = function(name, description, menu) {
-	this.name = name;
-	this.description = description;
-	this.menu = menu;
-};
-Restaurant.prototype.toString = toString;
-
-// -----------------CUSTOMER-------------------------
-var Customer = function(dietaryPreference) {
-	this.dietaryPreference = dietaryPreference;
-};
-Customer.prototype.toString = toString;
-
-
-
-
-
-// Create new instances of FoodItems
-var tortilla = new FoodItem('tortilla',100,true,false,true);
-var beans = new FoodItem('beans',100,true,true,true);
-var rice = new FoodItem('rice',100,true,false,true);
-var steak = new FoodItem('steak',200,false,true,true);
-var lime = new FoodItem('lime',5,true,true,false);
-var avacado = new FoodItem('avacado',10,true,true,true);
-var greenPeppers = new FoodItem('Green Peppers',5,true,true,true);
-var tequila = new FoodItem('tequila', 100,true,true,true);
-var salt = new FoodItem('salt',0,true,true,true);
-var margaritaMix = new FoodItem('Margarita Mix',200,true,true,false);
-
-// Create new instances of Plates
-var burrito = new Plate('Burrito Plate','Burrito on a plate',7);
-var guacamole = new Plate('Guacamole Plate','Guacamole!!!',5);
-// Add Ingredients to Plates
-burrito.ingredients = [tortilla, beans, rice, steak];
-guacamole.ingredients = [avacado, lime, greenPeppers];
-
-// Create new instances of Drinks
-var margarita = new Drink('Margarita','booze',3);
-// Add ingredients to Drinks
-margarita.ingredients = [tequila, salt, margaritaMix];
-
-// Create new menu
-var ourMenu = new Menu();
-// Add plates to menu
-ourMenu.plates = [burrito, guacamole, margarita];
-
-// Create new Restaurant
-var ourRestaurant = new Restaurant("Pepe's",'Mexican Food',ourMenu);
-
-
-
-
-
-// console.log(ourRestaurant.toString());
-
-
-
-// console.log(burrito.isVegan());
-// console.log(burrito.isGlutenFree());
-// console.log(burrito.isCitrusFree());
-
 // -------------Dynamically Create Menu----------------
 $(document).on('ready', function() {
 
-	console.log('document ready');
+	
+	// Create header title with restaurant name of an instance of a restaurant
+	var createHeader = function(restaurantObject){
+		$('.header').append('<h1>Welcome to ' + restaurantObject.name + '!</h1>');
+	}
 
+	// Call createHeader function, passing it an instance of a restaurant
+	createHeader(ourRestaurant);
+
+	// Construct the elements for an individual section of a menu from a pre-created template
 	var createMenuSection = function(sectionName){
 		var section = $('.template.original').clone();
 		section.removeClass('original');
@@ -196,13 +22,10 @@ $(document).on('ready', function() {
 		return section;
 	};
 
-// createMenuSection('Desserts');
-// createMenuSection('Entrees');
-// createMenuSection('Drinks');
-// createMenuSection('Appetizers');
 
+	// Construct individual menu items to be appended to sections of the menu at a later time
 	var menuItem = function(obj){
-		// console.log('in menu item function');
+
 		var item = $('<div class="item">');
 		var plate = $('<h5 class="plate item-title"></h5>');
 		var price = $('<h5 class="price item-title">' + obj.price + '</h5>');
@@ -232,39 +55,34 @@ $(document).on('ready', function() {
 	};
 
 
-var build = function(arr, sectionName){
-	
-	var section = createMenuSection(sectionName);	
 
-	arr.map(function(obj){
-		section.find($('ul')).append($('<li class="list-item">'));
-		$('.list-item').append(menuItem(obj));
-		$('.list-item').removeClass('list-item');
-	});
-};
+	var build = function(arr, sectionName){
+		
+		var section = createMenuSection(sectionName);	
 
-
-// Construct Food Arrays and Append everything to the DOM
+		arr.map(function(obj){
+			section.find($('ul')).append($('<li class="list-item">'));
+			$('.list-item').append(menuItem(obj));
+			$('.list-item').removeClass('list-item');
+		});
+	};
 
 
+	// Construct Food Arrays and Append everything to the DOM
+	var app = [guacamole];
+	build(app, 'Appetizers');
+
+	var drk = [margarita];
+	build(drk, 'Drinks');
+
+	var ent = [burrito];
+	build(ent, 'Entrees');
+
+	var des = [];
+	build(des, 'Desserts');
 
 
-
-
-var app = [guacamole];
-build(app, 'Appetizers');
-
-var drk = [margarita];
-build(drk, 'Drinks');
-
-var ent = [burrito];
-build(ent, 'Entrees');
-
-var des = [];
-build(des, 'Desserts');
-
-
-// Event Handlers for Menu Sections
+	// Event Handlers for Menu Sections
 	$(document).on('click', '.item', function(){
 		// console.log('clicked');
 		$(this).find('.description-container').slideToggle();
@@ -288,11 +106,13 @@ build(des, 'Desserts');
 		$(this).remove();
 	});
 
-	$(document).on('click', 'input[type="checkbox"]', function(){
+	
+	// add highlight class to items matching checked box within customer preference form
+	var highlight = function(item){
 
 		$(document).find('.item').removeClass('highlighted');
 
-		var arr = $(this).closest($('form')).find($(':checked')).toArray();
+		var arr = $('#customer-preference').find($(':checked')).toArray();
 		
 		var newClass = arr.map(function(item){
 			var checkName = $(item).attr('name');
@@ -300,8 +120,19 @@ build(des, 'Desserts');
 		}).join('');
 
 		$(document).find(newClass).addClass('highlighted');
-	})
+	};
 
+	// execute highlight class function when customer preference checkboxes are clicked
+	$(document).on('click', '#customer-preference input[type="checkbox"]', function(){ 
+		var item = $(this);
+		highlight(item);
+		
+	});
+
+	// execute highlight class function when document is ready. (checkbox state maintained when 'back' button used from different page)
+	var item = $('#customer-preference input[type="checkbox"]');
+	highlight(item);
+	
   
 });
 
@@ -313,9 +144,6 @@ build(des, 'Desserts');
 
 
 
-
-// input[type="checkbox"]
-// .prop('checked')
 
 
 

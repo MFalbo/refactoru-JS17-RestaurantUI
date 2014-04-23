@@ -7,15 +7,16 @@
   <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-	<a href="admin.html">Admin Page</a>
 	
 	<div id="main-container">
-		<header ></header>
-		
+
+		<header class="header"></header>
+		<a href="admin.html">Admin Page</a>
+
 		<div id="main-content">
 			<div id="customer">
 				<h2>Customer Preferences</h2>
-				<form>
+				<form id="customer-preference">
 					<div class="form-element">
 						<input name="vegan" type="checkbox"><label>Vegan</label>
 					</div>
@@ -45,6 +46,7 @@
 	</div>
 	
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript" src="admin.js"></script>
   <script type="text/javascript" src="main.js"></script>
 
 </body>
