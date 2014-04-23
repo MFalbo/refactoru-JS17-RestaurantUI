@@ -189,7 +189,7 @@ $(document).on('ready', function() {
 	var createMenuSection = function(sectionName){
 		var section = $('.template.original').clone();
 		section.removeClass('original');
-		$('#menu').prepend(section);
+		$('#menu').append(section);
 		section.find($('h3')).text(sectionName);
 		// section.find($('ul')).append($('<li>'));
 
@@ -217,15 +217,15 @@ $(document).on('ready', function() {
 
 		if (obj.isVegan()) {
 			var veganIcon = $('<h5 class="icon">★</h5>');
-			item.append(veganIcon);
+			item.append(veganIcon).addClass('vegan');
 		}
 		if (obj.isGlutenFree()) {
 			var glutenIcon = $('<h5 class="icon">●</h5>');
-			item.append(glutenIcon);
+			item.append(glutenIcon).addClass('gluten');
 		}
 		if (obj.isCitrusFree()) {
 			var citrusIcon = $('<h5 class="icon">❁</h5>');
-			item.append(citrusIcon);
+			item.append(citrusIcon).addClass('citrus');
 		}
 		item.append(price).append(descriptionContainer);
 		return item;
@@ -245,17 +245,23 @@ var build = function(arr, sectionName){
 
 
 // Construct Food Arrays and Append everything to the DOM
-var des = [];
-build(des, 'Desserts');
 
-var ent = [burrito];
-build(ent, 'Entrees');
+
+
+
+
+
+var app = [guacamole];
+build(app, 'Appetizers');
 
 var drk = [margarita];
 build(drk, 'Drinks');
 
-var app = [guacamole];
-build(app, 'Appetizers');
+var ent = [burrito];
+build(ent, 'Entrees');
+
+var des = [];
+build(des, 'Desserts');
 
 
 // Event Handlers for Menu Sections
@@ -282,6 +288,20 @@ build(app, 'Appetizers');
 		$(this).remove();
 	});
 
+	$(document).on('click', 'input[type="checkbox"]', function(){
+
+		$(document).find('.item').removeClass('highlighted');
+
+		var arr = $(this).closest($('form')).find($(':checked')).toArray();
+		
+		var newClass = arr.map(function(item){
+			var checkName = $(item).attr('name');
+			return '.' + checkName;
+		}).join('');
+
+		$(document).find(newClass).addClass('highlighted');
+	})
+
   
 });
 
@@ -294,7 +314,8 @@ build(app, 'Appetizers');
 
 
 
-
+// input[type="checkbox"]
+// .prop('checked')
 
 
 
