@@ -69,16 +69,16 @@ $(document).on('ready', function() {
 
 
 	// Construct Food Arrays and Append everything to the DOM
-	var app = [guacamole];
+	
 	build(app, 'Appetizers');
 
-	var drk = [margarita];
+	
 	build(drk, 'Drinks');
 
-	var ent = [burrito];
+	
 	build(ent, 'Entrees');
 
-	var des = [];
+	
 	build(des, 'Desserts');
 
 
