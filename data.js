@@ -1,13 +1,22 @@
 var orderPrice = 0;
-
+//-----------------------INGREDIENT------------------------------
 var FoodItem = function(name, calories, vegan, glutenFree, citrusFree){
-	this.name = name;
-	this.calories = calories;
-	this.vegan = vegan;
-	this.glutenFree = glutenFree;
-	this.citrusFree = citrusFree;
+	if (arguments.length === 1) {
+		var original = name;
+		for (key in original) {
+			if (typeof original[key] !== 'function') {
+				this[key] = original[key];
+			}
+		}	
+	}
+	else {
+		this.name = name;
+		this.calories = calories;
+		this.vegan = vegan;
+		this.glutenFree = glutenFree;
+		this.citrusFree = citrusFree;
+	}
 };
-
 
 var isVegan = function() {
 	var isVegan = true;
@@ -38,6 +47,8 @@ var isCitrusFree = function() {
 	});
 	return citrusFree;
 };
+
+//-----------------------DRINK------------------------------
 var Drink = function(name, description, price) {
 	this.name = name;
 	this.price = price;
@@ -47,7 +58,8 @@ var Drink = function(name, description, price) {
 Drink.prototype.isVegan = isVegan;
 Drink.prototype.isGlutenFree = isGlutenFree;
 Drink.prototype.isCitrusFree = isCitrusFree;
-// -----------------PLATE---------------------------
+
+//-----------------------PLATE------------------------------
 var Plate = function(name, description, price) {
 	this.name = name;
 	this.price = price;
@@ -60,24 +72,25 @@ Plate.prototype.isGlutenFree = isGlutenFree;
 Plate.prototype.isCitrusFree = isCitrusFree;
 
 
-// ----------------ORDER-------------------------
+
+//-----------------------ORDER------------------------------
 var Order = function() {
 	this.plates = [];
 };
 
-// -----------------MENU-------------------------
+// ----------------------MENU-------------------------------
 var Menu = function() {
 	this.plates = [];
 };
 
-// -----------------RESTAURANT-------------------------
+// ----------------------RESTAURANT-------------------------
 var Restaurant = function(name, description, menu) {
 	this.name = name;
 	this.description = description;
 	this.menu = menu;
 };
 
-// -----------------CUSTOMER-------------------------
+// -----------------------CUSTOMER----------------------------
 var Customer = function(dietaryPreference) {
 	this.dietaryPreference = dietaryPreference;
 };

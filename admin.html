@@ -13,12 +13,12 @@
 			<a href="index.html">HOME</a>
 			<h1>ADMIN PAGE</h1>
 		</header>
-		
+		<div id="ingredient-sidebar"><ul></ul></div>
 		<div id="main-content">
 			<div>
 				<h3>Ingredients</h3>
 				<div>
-					<form id="ingredient-form">
+					<form class="create-form">
 						<label>Ingredient Name</label><input id="ingredient-name" type="text">
 						<label> Calories</label><input id="ingredient-calories" type="text">
 						<label> Vegan</label><input id="ingredient-vegan" type="checkbox">
@@ -32,13 +32,27 @@
 			</div>
 			<div>
 				<h3>Drinks</h3>
-				<div><form></form>
+				<div>
+					<form class="create-form">
+							<label>Ingredient Name</label><input class="create-name" type="text">
+							<label>Price</label><input class="create-price" type="text">
+							<label>Description</label><textarea class="create-description"></textarea>
+							<button class="ingredient-button">Ingredients</button>
+							<input type="submit">
+					</form>
 					<ul></ul>
-					</div>
+				</div>
 			</div>
 			<div>
 				<h3>Plates</h3>
-				<div><form></form>
+				<div>
+					<form class="create-form">
+						<label>Ingredient Name</label><input class="create-name" type="text">
+						<label>Price</label><input class="create-price" type="text">
+						<label>Description</label><textarea class="create-description"></textarea>
+						<button class="ingredient-button">Ingredients</button>
+						<input type="submit">
+					</form>
 					<ul></ul>
 					</div>
 			</div>

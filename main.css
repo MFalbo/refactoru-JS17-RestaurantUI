@@ -1,6 +1,6 @@
-.header{
+/*.header{
 	background-color: #FFF;
-}
+}*/
 /*.template{
 	float: left;
 	display: inline-block;
@@ -41,7 +41,7 @@
 }
 
 .highlighted{
-	background-color: #C1DCE0;
+	background-color: rgba(9,255,0,0.3);
 }
 
 
@@ -53,6 +53,9 @@
 
 body {
 	background-color: #E3E3E3;
+	background-image: url(http://publicaffairslatinamerica.com/wp-content/uploads/2012/11/The-Rise-of-Mexico-The-Economist1.png);
+	background-repeat: horizontal;
+	background-size: 100%;
 }
 
 a {
@@ -71,7 +74,7 @@ a {
 #main-container {
 	width: 80%;
 	margin: 0 auto;
-	background-color: #FFF;
+	background-color: rgba(255,255,255,0.5);
 	border: 2px solid #000;
 	overflow: hidden;
 }
@@ -91,6 +94,7 @@ a {
 }
 #customer h2 {
 	text-align: center;
+	border-bottom: 1px solid grey;
 }
 
 #menu-container {
