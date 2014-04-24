@@ -1,68 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>RestaurantUI - Admin</title>
+ 	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body>
-	<h1>ADMIN PAGE</h1>
-	<a href="index.html">HOME</a>
-	
-	<div>
-		<div>
-			<h3>Ingredients</h3>
+	<div id="main-container">
+		<header class="header">
+			<a href="index.html">HOME</a>
+			<h1>ADMIN PAGE</h1>
+		</header>
+		
+		<div id="main-content">
 			<div>
-				<form id="ingredient-form">
-					<label>Ingredient Name</label><input id="ingredient-name" type="text">
-					<label> Calories</label><input id="ingredient-calories" type="text">
-					<label> Vegan</label><input id="ingredient-vegan" type="checkbox">
-					<label> Gluten Free</label><input id="ingredient-gluten" type="checkbox">
-					<label> Citrus Free</label><input id="ingredient-citrus" type="checkbox">
-					<input type="submit">
-				</form>
-				<ul id="ingredients-list">
-				</ul>
+				<h3>Ingredients</h3>
+				<div>
+					<form id="ingredient-form">
+						<label>Ingredient Name</label><input id="ingredient-name" type="text">
+						<label> Calories</label><input id="ingredient-calories" type="text">
+						<label> Vegan</label><input id="ingredient-vegan" type="checkbox">
+						<label> Gluten Free</label><input id="ingredient-gluten" type="checkbox">
+						<label> Citrus Free</label><input id="ingredient-citrus" type="checkbox">
+						<input type="submit">
+					</form>
+					<ul id="ingredients-list">
+					</ul>
+				</div>
+			</div>
+			<div>
+				<h3>Drinks</h3>
+				<div><form></form>
+					<ul></ul>
+					</div>
+			</div>
+			<div>
+				<h3>Plates</h3>
+				<div><form></form>
+					<ul></ul>
+					</div>
+			</div>
+			<div>
+				<h3>Order</h3>
+				<div><form></form>
+					<ul></ul>
+					</div>
+			</div>
+			<div>
+				<h3>Menu</h3>
+				<div><form></form>
+					<ul></ul>
+					</div>
+			</div>
+			<div>
+				<h3>Restaurant</h3>
+				<div><form></form>
+					<ul></ul>
+					</div>
+			</div>
+			<div>
+				<h3>Customer</h3>
+				<div><form></form>
+					<ul></ul>
+					</div>
 			</div>
 		</div>
-		<div>
-			<h3>Drinks</h3>
-			<div><form></form>
-				<ul></ul>
-				</div>
-		</div>
-		<div>
-			<h3>Plates</h3>
-			<div><form></form>
-				<ul></ul>
-				</div>
-		</div>
-		<div>
-			<h3>Order</h3>
-			<div><form></form>
-				<ul></ul>
-				</div>
-		</div>
-		<div>
-			<h3>Menu</h3>
-			<div><form></form>
-				<ul></ul>
-				</div>
-		</div>
-		<div>
-			<h3>Restaurant</h3>
-			<div><form></form>
-				<ul></ul>
-				</div>
-		</div>
-		<div>
-			<h3>Customer</h3>
-			<div><form></form>
-				<ul></ul>
-				</div>
-		</div>
 	</div>
-
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script type="text/javascript" src="data.js"></script>
 	<script src="admin.js"></script>

@@ -10,36 +10,40 @@
 	
 	<div id="main-container">
 
-		<header class="header"></header>
-		<a href="admin.html">Admin Page</a>
-
+		<header class="header">
+			<a href="admin.html">ADMIN</a>
+		</header>
 		<div id="main-content">
-			<div id="customer">
-				<h2>Customer Preferences</h2>
-				<form id="customer-preference">
-					<div class="form-element">
-						<input name="vegan" type="checkbox"><label>Vegan</label>
-					</div>
-					<div class="form-element">
-						<input name="citrus" type="checkbox"><label>Citrus Free</label>
-					</div>
-					<div class="form-element">
-						<input name="gluten" type="checkbox"><label>Gluten Free</label>
-					</div>
-				</form>
+			<div id="customer-container">
+				<div id="customer">
+					<h2>Customer<br/>Preferences</h2>
+					<form id="customer-preference">
+						<div class="form-element">
+							<input name="vegan" type="checkbox"><label>Vegan</label>
+						</div>
+						<div class="form-element">
+							<input name="citrus" type="checkbox"><label>Citrus Free</label>
+						</div>
+						<div class="form-element">
+							<input name="gluten" type="checkbox"><label>Gluten Free</label>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div id="menu">
+			<div id="menu-container">
 				<h2>Menu</h2>
-				<section class="template original">
-					<h3></h3>
-					<ul></ul>
-				</section>
-				<!-- <div id="menu-footer"></div> -->
+				<div id="menu">
+					<section class="template original">
+						<h3></h3>
+						<ul></ul>
+					</section>
+					<!-- <div id="menu-footer"></div> -->
+				</div>
 			</div>
-			<div>
-				<h2>Orders</h2>
+			<div id="order-container">
+				<h2>Order</h2>
 				<ul id="order"></ul>
-				<h3 id="order-price">Order Price</h3>
+				<h3>Order Total: $<span id="order-price">0</span></h3>
 			</div>
 		</div>
 		<footer></footer>

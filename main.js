@@ -31,7 +31,7 @@ $(document).on('ready', function() {
 		var price = $('<h5 class="price item-title">' + obj.price + '</h5>');
 		var descriptionContainer = $('<div class="description-container"></div>');
 		var description = $('<p class="description"></p>');
-		var addBtn = $('<button class="add-item">');
+		var addBtn = $('<button class="add-item">Add to Order</button>');
 		plate.text(obj.name);
 		description.text(obj.description);
 		descriptionContainer.append(description);
@@ -93,7 +93,7 @@ $(document).on('ready', function() {
 		// console.log('clicked');
 		var orderItem = $(this).closest('.item').find('.plate').text();
 		// console.log(orderItem);
-		$('#order').append('<li class="order-item">' + orderItem + ' : $' + '<span>' + itemPrice + '</span>' + '</li>')
+		$('#order').append('<li class="order-item">' + orderItem + ': $' + '<span>' + itemPrice + '</span>' + '</li>')
 		orderPrice += itemPrice;
 		$('#order-price').text(orderPrice);
 		return false;
